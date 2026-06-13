@@ -6,7 +6,7 @@ export const useProfile = () => {
   return useQuery({
     queryKey: ["profile"],
     queryFn: async () => {
-      const { data } = await api.get("/users");
+      const { data } = await api.get("/auth/me");
       return data;
     },
   });
@@ -15,7 +15,7 @@ export const useProfile = () => {
 export const useUpdateProfile = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: any) => api.patch("/users", data),
+    mutationFn: (data: any) => api.patch("/users/me", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["profile"] });
       alert("Cập nhật thành công!");

@@ -24,7 +24,7 @@ export default function OrdersPage() {
                 <p className="text-sm text-gray-500">Ngày đặt: {new Date(order.createdAt).toLocaleDateString()}</p>
               </div>
               <div className="text-right">
-                <p className="font-bold">{order.totalPrice.toLocaleString()} VNĐ</p>
+                <p className="font-bold">{(order.totalAmount || 0).toLocaleString()} VNĐ</p>
                 <span className={`inline-block px-2 py-1 rounded text-xs ${
                   order.status === 'DELIVERED' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
                 }`}>

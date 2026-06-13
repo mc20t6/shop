@@ -13,7 +13,7 @@ function useCurrentUser() {
   return useQuery({
     queryKey: ['current-user'],
     queryFn: async () => {
-      const { data } = await api.get('/users/me');
+      const { data } = await api.get('/auth/me');
       return data;
     },
     retry: false,

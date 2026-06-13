@@ -150,6 +150,23 @@ export class UsersService {
     });
   }
 
+  async updateProfile(userId: string, data: { fullName?: string; phone?: string }) {
+    if (!Types.ObjectId.isValid(userId)) {
+      throw new BadRequestException('ID người dùng không hợp lệ');
+    }
+
+    const user = await this.userRepository.findByIdUser(userId);
+
+    if (!user) {
+      throw new NotFoundException('Không tìm thấy người dùng');
+    }
+
+    return this.userRepository.updateByIdUser(userId, {
+      fullName: data.fullName,
+      phone: data.phone,
+    });
+  }
+
   async findAllManagedUsers(query: any) {
     const page = Math.max(Number(query.page) || 1, 1);
     const limit = Math.max(Number(query.limit) || 10, 1);

@@ -32,7 +32,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [added, setAdded] = useState(false);
 
   // Fetch variants để lấy giá & variantId (cache 5 phút)
-  const { data: variants = [] } = useQuery({
+  const { data: variants = [], isLoading: isLoadingVariants } = useQuery({
     queryKey: ["variants", productId],
     queryFn: async () => {
       try {
@@ -124,7 +124,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </h3>
 
           {/* Giá tiền */}
-          {minPrice === null ? (
+          {isLoadingVariants ? (
             <div className="h-5 w-24 bg-gray-200 animate-pulse rounded mb-4" />
           ) : minPrice > 0 ? (
             <div className="mb-3">

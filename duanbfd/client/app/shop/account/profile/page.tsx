@@ -1,17 +1,15 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useProfile, useUpdateProfile } from "@/hooks/useUser";
-import error from 'next/dist/api/error';
-
 export default function ProfilePage() {
-  const { data: profile, isLoading } = useProfile();
+  const { data: profile, isLoading, error } = useProfile();
   const { mutate: updateProfile, isPending } = useUpdateProfile();
   const [formData, setFormData] = useState({ name: '', phone: '' });
 
   // Khi dữ liệu từ API về, cập nhật vào form
   useEffect(() => {
     if (profile) {
-      setFormData({ name: profile.name, phone: profile.phone || '' });
+      setFormData({ name: profile.fullName || profile.name || '', phone: profile.phone || '' });
     }
   }, [profile]);
 

@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  Body,
   Controller,
   Patch,
   Req,
@@ -26,6 +27,24 @@ type RequestWithUser = Request & {
 @UseGuards(JwtAuthGuard)
 export class ProfileController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Patch('me')
+  updateMyProfile(
+    @Req() req: RequestWithUser,
+    @Body() body: { name?: string; phone?: string; fullName?: string },
+  ) {
+    const userId = req.user.id || req.user.userId || req.user.sub;
+    if (!userId) {
+      throw new BadRequestException('Không lấy được thông tin người dùng');
+    }
+
+    const fullNameToUpdate = body.fullName || body.name;
+
+    return this.usersService.updateProfile(userId, {
+      fullName: fullNameToUpdate,
+      phone: body.phone,
+    });
+  }
 
   @Patch('me/avatar')
   @UseInterceptors(FileInterceptor('avatar', imageUploadOptions('users')))

@@ -183,6 +183,14 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
+  async getMe(userId: string) {
+    const user = await this.userRepository.findByIdUser(userId);
+    if (!user) {
+      throw new UnauthorizedException('Người dùng không tồn tại');
+    }
+    return this.toAuthUser(user);
+  }
+
   private toAuthUser(user: any): AuthUser {
     return {
       id: user.id || user._id?.toString(),
