@@ -1,0 +1,53 @@
+{
+  "info": {
+    "_postman_id": "c6a04206-9dbe-4349-8fcf-788da9ebd655",
+    "name": "User",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54875249",
+    "_collection_link": "https://go.postman.co/collection/54875249-c6a04206-9dbe-4349-8fcf-788da9ebd655?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTI2Mzc4NGRmYTg3Yzg1NTgwZTUxZWMiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc4MTA1NTQ5OSwiZXhwIjoxNzgxNjYwMjk5fQ.76EVl9XLmFPuiJmFsyJGlkxky6q5xmc57xrF1RWSk0o",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "avatar",
+              "type": "file",
+              "uuid": "b53bed2d-4f56-4981-b819-f3d641de7e7a",
+              "src": "/Users/mac/Downloads/ChatGPT Image 20_08_03 9 thg 6, 2026.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3001/users/me/avatar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "users",
+            "me",
+            "avatar"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "info": {
+    "_postman_id": "d8f2b1ea-0a41-4db7-8155-4be7510762bd",
+    "name": "Transaction",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54875249",
+    "_collection_link": "https://go.postman.co/collection/54875249-d8f2b1ea-0a41-4db7-8155-4be7510762bd?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": \"665f0c9f9c1a3c0012a34567\",\n  \"transactionNo\": \"TXN001\",\n  \"gateway\": \"vnpay\",\n  \"amount\": 250000,\n  \"status\": \"success\",\n  \"rawResponse\": {\n    \"bankCode\": \"NCB\",\n    \"message\": \"Payment success\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/transactions",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "transactions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{url}}/transactions",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": \"665f0c9f9c1a3c0012a34567\",\n  \"transactionNo\": \"TXN001\",\n  \"gateway\": \"vnpay\",\n  \"amount\": 250000,\n  \"status\": \"success\",\n  \"rawResponse\": {\n    \"bankCode\": \"NCB\",\n    \"message\": \"Payment success\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{url}}/transactions",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "transactions"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

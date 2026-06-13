@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  /* --- COLOR TOKENS --- */
+  /* Brand Colors */
+  --color-brand-primary: #0a5c36; /* Xanh lá đậm (Sinh thái, bền vững) */
+  --color-brand-secondary: #008080; /* Xanh Teal (Công nghệ, giải pháp hiện đại) */
+  --color-brand-accent: #f2994a; /* Cam đất (Năng lượng, thu hoạch, điểm nhấn) */
+
+  /* Neutral Colors */
+  --color-neutral-dark: #1e293b; /* Slate 800 (Chữ chính, độ tương phản cao WCAG) */
+  --color-neutral-light: #f8fafc; /* Slate 50; (Nền chính) */
+  --color-neutral-surface: #ffffff; /* Trắng (Nền card, section phụ) */
+  --color-neutral-muted: #64748b; /* Slate 500 (Chữ phụ, border) */
+
+  /* System States */
+  --color-state-focus: #2563eb; /* Xanh dương (Đường outline khi focus để đạt a11y) */
+
+  /* --- SPACING TOKENS (Mobile-first Rem scale) --- */
+  --space-xs: 0.5rem; /* 8px */
+  --space-sm: 1rem; /* 16px */
+  --space-md: 1.5rem; /* 24px */
+  --space-lg: 3rem; /* 48px */
+  --space-xl: 5rem; /* 80px */
+
+  /* --- TYPOGRAPHY TOKENS --- */
+  /* Font Family */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Font Sizes */
+  --text-xs: 0.75rem; /* 12px */
+  --text-base: 1rem; /* 16px (Body chuẩn) */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px (Heading 3 Mobile) */
+  --text-2xl: 1.75rem; /* 28px (Heading 2 Mobile) */
+  --text-3xl: 2.25rem; /* 36px (Heading 1 Mobile) */
+}
+
+/* Desktop Typography Scaling (Từ màn hình md trở lên) */
+@media (min-width: 768px) {
+  :root {
+    --text-xl: 1.5rem; /* 24px */
+    --text-2xl: 2.25rem; /* 36px */
+    --text-3xl: 3.5rem; /* 56px */
+  }
+}

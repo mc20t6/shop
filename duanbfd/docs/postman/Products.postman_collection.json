@@ -1,0 +1,237 @@
+{
+  "info": {
+    "_postman_id": "56a1de4e-6bf7-4377-960f-55657f29dee1",
+    "name": "Products",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54875249",
+    "_collection_link": "https://go.postman.co/collection/54875249-56a1de4e-6bf7-4377-960f-55657f29dee1?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTI2Mzc4NGRmYTg3Yzg1NTgwZTUxZWMiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc4MDk5MDU2NSwiZXhwIjoxNzgxNTk1MzY1fQ.8_vS9qlipOUZ2qM8n2zLVuO1sDFI7PpgfvsTdyREy_4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Áo thun basic\",\n    \"slug\": \"ao-thun-basic\",\n    \"description\": \"Áo thun cotton mặc hằng ngày\",\n    \"material\": \"Cotton\",\n    \"careGuide\": \"Giặt nhẹ, không dùng chất tẩy mạnh\",\n    \"images\": [\n      \"https://example.com/ao-thun.jpg\"\n    ],\n    \"isActive\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/products",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{url}}/products",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTI2Mzc4NGRmYTg3Yzg1NTgwZTUxZWMiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc4MDk5MDU2NSwiZXhwIjoxNzgxNTk1MzY1fQ.8_vS9qlipOUZ2qM8n2zLVuO1sDFI7PpgfvsTdyREy_4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Áo thun basic\",\n    \"slug\": \"ao-thun-basic\",\n    \"description\": \"Áo thun cotton mặc hằng ngày\",\n    \"material\": \"Cotton\",\n    \"careGuide\": \"Giặt nhẹ, không dùng chất tẩy mạnh\",\n    \"images\": [\n      \"https://example.com/ao-thun.jpg\"\n    ],\n    \"isActive\": true\n}"
+        },
+        "url": {
+          "raw": "{{url}}/products",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{url}}/products/6a27c5a539383d25166bc45a/variants",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTI2Mzc4NGRmYTg3Yzg1NTgwZTUxZWMiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc4MDk5MDU2NSwiZXhwIjoxNzgxNTk1MzY1fQ.8_vS9qlipOUZ2qM8n2zLVuO1sDFI7PpgfvsTdyREy_4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "productId",
+              "value": "6a27c5a539383d25166bc45a",
+              "type": "text",
+              "uuid": "828626b3-119c-43ec-af7f-15a7b8e231a8"
+            },
+            {
+              "key": "size",
+              "value": "S",
+              "type": "text",
+              "uuid": "37d4b0b8-ea46-4d44-ae98-3ea9e7f2923a"
+            },
+            {
+              "key": "color",
+              "value": "Trang",
+              "type": "text",
+              "uuid": "e09102a2-513e-4946-99e4-ca8cc30bf17b"
+            },
+            {
+              "key": "colorCode",
+              "value": "#FFF",
+              "type": "text",
+              "uuid": "abe05a40-745a-4759-bfe6-075d62bd044b"
+            },
+            {
+              "key": "sku",
+              "value": "ao-thun-trang-s",
+              "type": "text",
+              "uuid": "2fb2dde3-56d3-4856-b473-bbd9da5cfc81"
+            },
+            {
+              "key": "stock",
+              "value": "12",
+              "type": "text",
+              "uuid": "8eefbc0c-7d28-417e-91e9-c451581af428"
+            },
+            {
+              "key": "price",
+              "value": "199000",
+              "type": "text",
+              "uuid": "6a19e30f-7727-40f1-b5a8-6eeb2b09bafd"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "uuid": "692bebb2-4792-4f9e-9b13-86433449c4f2",
+              "src": "/Users/mac/Desktop/LEMSHOP/product/ao thun the thao/trang.webp"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{url}}/products/6a27c5a539383d25166bc45a/variants",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "products",
+            "6a27c5a539383d25166bc45a",
+            "variants"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{url}}/products",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTI2Mzc4NGRmYTg3Yzg1NTgwZTUxZWMiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc4MTA1NTQ5OSwiZXhwIjoxNzgxNjYwMjk5fQ.76EVl9XLmFPuiJmFsyJGlkxky6q5xmc57xrF1RWSk0o",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "Áo thun basic 1",
+              "type": "text",
+              "uuid": "52acfd5b-6812-4e6f-9e1b-4fbbd9f9ee42"
+            },
+            {
+              "key": "slug",
+              "value": "ao-thun-basic-1",
+              "type": "text",
+              "uuid": "eb4ad7a4-f25a-4b66-9be6-1528c63b6137"
+            },
+            {
+              "key": "description",
+              "value": "Áo cotton",
+              "type": "text",
+              "uuid": "33929130-26fb-4f69-bc95-4e5fa49de0b7"
+            },
+            {
+              "key": "material",
+              "value": "Cotton",
+              "type": "text",
+              "uuid": "8b0f8b2d-b1f5-4840-8a75-022f12650183"
+            },
+            {
+              "key": "careGuide",
+              "value": "Giặt nhẹ",
+              "type": "text",
+              "uuid": "e8f18c0d-4d63-43ab-896f-f04dfcb631d6"
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "uuid": "c5d6137b-c5fb-4a3a-8220-cdb74e4def76",
+              "src": "/Users/mac/Downloads/Xanh.png"
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "uuid": "2aeb4579-df7e-4eee-90da-44f8a923c126",
+              "src": "/Users/mac/Downloads/Xanh.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{url}}/products",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "products"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

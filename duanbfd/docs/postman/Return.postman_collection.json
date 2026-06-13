@@ -1,0 +1,152 @@
+{
+  "info": {
+    "_postman_id": "2ea3b61a-4c1f-4225-abb1-f07b417ca52a",
+    "name": "Return",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54875249",
+    "_collection_link": "https://go.postman.co/collection/54875249-2ea3b61a-4c1f-4225-abb1-f07b417ca52a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": \"6a27e036fdc2f7a00823f896\",\n  \"userId\": \"6a27d98f5f8e6628d0dfb569\",\n  \"reason\": \"Sản phẩm bị lỗi đường may\",\n  \"type\": \"return\",\n  \"images\": [\n    \"https://example.com/error-1.jpg\",\n    \"https://example.com/error-2.jpg\"\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/returns",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "returns"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": \"6a27e036fdc2f7a00823f896\",\n  \"userId\": \"6a27d98f5f8e6628d0dfb569\",\n  \"reason\": \"Sản phẩm bị lỗi đường may\",\n  \"type\": \"return\",\n  \"images\": [\n    \"https://example.com/error-1.jpg\",\n    \"https://example.com/error-2.jpg\"\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{url}}/returns",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "returns"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"Sản phẩm bị lỗi và sai màu\",\n  \"images\": [\n    \"https://example.com/error-1.jpg\"\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{url}}/returns/6a27e7c6294ed6da1e84a0f5",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "returns",
+            "6a27e7c6294ed6da1e84a0f5"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{url}}/returns/6a27e7c6294ed6da1e84a0f5/status",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"approved\",\n  \"staffNote\": \"Đồng ý cho khách trả hàng\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/returns/6a27e7c6294ed6da1e84a0f5/status",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "returns",
+            "6a27e7c6294ed6da1e84a0f5",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{url}}/returns/6a27e7c6294ed6da1e84a0f5/status",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTI3ZTkxMzc4MWQyZjlhYzQxZmY1ZGQiLCJlbWFpbCI6InN0YWZmMUBnbWFpbC5jb20iLCJyb2xlIjoiU1RBRkYiLCJpYXQiOjE3ODEwMDA1OTcsImV4cCI6MTc4MTYwNTM5N30.FzrpJb68SlIHVuOMZ1Zr41d4TKP57HJebx06TwliLLU",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"rejected\",\n  \"staffNote\": \"Sản phẩm không đủ điều kiện trả hàng\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/returns/6a27e7c6294ed6da1e84a0f5/status",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "returns",
+            "6a27e7c6294ed6da1e84a0f5",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

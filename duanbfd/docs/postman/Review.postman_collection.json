@@ -1,0 +1,181 @@
+{
+  "info": {
+    "_postman_id": "cd9c5420-9fc9-4e4c-9625-2fdeb4230c9d",
+    "name": "Review",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54875249",
+    "_collection_link": "https://go.postman.co/collection/54875249-cd9c5420-9fc9-4e4c-9625-2fdeb4230c9d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"6a27d98f5f8e6628d0dfb569\",\n  \"productId\": \"6a27c5a539383d25166bc45a\",\n  \"orderId\": \"6a27e036fdc2f7a00823f896\",\n  \"rating\": 5,\n  \"comment\": \"Sản phẩm đẹp, chất vải tốt\",\n  \"images\": [\n    \"https://example.com/review-1.jpg\",\n    \"https://example.com/review-2.jpg\"\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/reviews",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "reviews"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{url}}/reviews",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"6a27d98f5f8e6628d0dfb569\",\n  \"productId\": \"6a27c5a539383d25166bc45a\",\n  \"orderId\": \"6a27e036fdc2f7a00823f896\",\n  \"rating\": 5,\n  \"comment\": \"Sản phẩm đẹp, chất vải tốt\",\n  \"images\": [\n    \"https://example.com/review-1.jpg\",\n    \"https://example.com/review-2.jpg\"\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{url}}/reviews",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "reviews"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{url}}/reviews/6a27eca0e07d430828c44c44",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rating\": 4,\n  \"comment\": \"Sản phẩm ổn, giao hàng nhanh\",\n  \"images\": [\n    \"https://example.com/review-updated.jpg\"\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{url}}/reviews/6a27eca0e07d430828c44c44",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "reviews",
+            "6a27eca0e07d430828c44c44"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "userId",
+              "value": "6a27d98f5f8e6628d0dfb569",
+              "type": "text",
+              "uuid": "0e9d75a8-3faa-4a82-9280-baca947014df"
+            },
+            {
+              "key": "productId",
+              "value": "6a28c0caee8705cfd55533c4",
+              "type": "text",
+              "uuid": "35bb0978-8307-4f57-aa50-f24169e98d20"
+            },
+            {
+              "key": "orderId",
+              "value": "6a27e036fdc2f7a00823f896",
+              "type": "text",
+              "uuid": "478692e9-6447-42eb-a906-af9a832b433b"
+            },
+            {
+              "key": "rating",
+              "value": "4",
+              "type": "text",
+              "uuid": "f87ec6e6-e38a-4158-bc65-7349f8d7ea18"
+            },
+            {
+              "key": "comment",
+              "value": "San pham dep",
+              "type": "text",
+              "uuid": "f71d39e1-f83f-42ce-ac33-87595ea32774"
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "uuid": "12b4e3ce-7c1b-4bd1-ba64-d84b916a2030",
+              "src": "/Users/mac/Desktop/LEMSHOP/product/ao thun nam/trang.webp"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3001/reviews?userId&productId&orderId&rating&comment&images",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "reviews"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": null,
+              "type": "text"
+            },
+            {
+              "key": "productId",
+              "value": null,
+              "type": "text"
+            },
+            {
+              "key": "orderId",
+              "value": null,
+              "type": "text"
+            },
+            {
+              "key": "rating",
+              "value": null,
+              "type": "text"
+            },
+            {
+              "key": "comment",
+              "value": null,
+              "type": "text"
+            },
+            {
+              "key": "images",
+              "value": null,
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
