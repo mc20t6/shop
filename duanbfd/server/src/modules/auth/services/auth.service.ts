@@ -114,16 +114,21 @@ export class AuthService {
     const email = emailDto.email.trim().toLowerCase();
     const user = await this.userRepository.findByEmail(email);
 
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    console.log(`====================================`);
+    console.log(`FORGOT PASSWORD REQUEST FOR: ${email}`);
+    console.log(`GENERATED OTP: ${otp}`);
+
     if (!user) {
+      console.log(`No user found for email: ${email}. OTP not saved.`);
+      console.log(`====================================`);
       return {
         message:
           'Mã xác thực khôi phục mật khẩu đã được gửi đến email của bạn!',
       };
     }
 
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    console.log(`====================================`);
-    console.log(`MÃ OTP QUÊN MẬT KHẨU LÀ: ${otp}`);
+    console.log(`User found. Saving OTP for: ${email}`);
     console.log(`====================================`);
 
     const expires = new Date();
@@ -133,6 +138,25 @@ export class AuthService {
       passwordResetToken: otp,
       passwordResetExpires: expires,
     });
+
+    try {
+      await this.mailerService.sendMail({
+        to: user.email,
+        subject: 'Yêu cầu khôi phục mật khẩu',
+        html: `
+          <div style="font-family: Arial, sans-serif; color: #333;">
+            <h2>Khôi phục mật khẩu</h2>
+            <p>Bạn vừa yêu cầu khôi phục mật khẩu cho tài khoản <strong>${user.email}</strong>.</p>
+            <p>Mã OTP của bạn là:</p>
+            <p style="font-size: 24px; font-weight: bold;">${otp}</p>
+            <p>Mã này có hiệu lực trong 10 phút.</p>
+            <p>Nếu bạn không yêu cầu thay đổi mật khẩu, hãy bỏ qua email này.</p>
+          </div>
+        `,
+      });
+    } catch (sendError) {
+      console.warn('MailerService sendMail failed:', sendError);
+    }
 
     return {
       message: 'Mã xác thực khôi phục mật khẩu đã được gửi đến email của bạn!',
@@ -148,6 +172,14 @@ export class AuthService {
 
     if (!user) {
       throw new BadRequestException('Mã OTP không chính xác hoặc đã hết hạn!');
+    }
+
+    if (!user.passwordResetExpires || user.passwordResetExpires < new Date()) {
+      await this.userRepository.updateById(user._id.toString(), {
+        passwordResetToken: undefined,
+        passwordResetExpires: undefined,
+      });
+      throw new BadRequestException('Mã OTP đã hết hạn. Vui lòng yêu cầu mã mới.');
     }
 
     const hashedPassword = await bcrypt.hash(dto.newPassword, 10);

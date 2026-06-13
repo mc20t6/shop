@@ -14,6 +14,7 @@ import { Request } from 'express';
 import { UsersService } from '../services/users.service';
 import { JwtAuthGuard } from '../../auth/guards/jwt.guard';
 import { imageUploadOptions } from '../../../common/upload/image-upload.util';
+import { ChangePasswordDto } from '../dto/change-password.dto';
 
 type RequestWithUser = Request & {
   user: {
@@ -65,5 +66,18 @@ export class ProfileController {
     const avatar = `/uploads/users/${file.filename}`;
 
     return this.usersService.updateAvatar(userId, avatar);
+  }
+
+  @Patch('change-password')
+  changePassword(
+    @Req() req: RequestWithUser,
+    @Body() body: ChangePasswordDto,
+  ) {
+    const userId = req.user.id || req.user.userId || req.user.sub;
+    if (!userId) {
+      throw new BadRequestException('Không lấy được thông tin người dùng');
+    }
+
+    return this.usersService.changePassword(userId, body);
   }
 }

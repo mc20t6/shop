@@ -5,19 +5,26 @@ export type AddressDocument = HydratedDocument<Address>;
 
 @Schema({ collection: 'addresses', timestamps: true })
 export class Address {
-  id: string;
+  @Prop()
+  id?: string;
 
   @Prop({ required: true })
-  userId: string;
+  userId!: string;
 
   @Prop({ required: true, trim: true })
-  fullName: string;
+  fullName!: string;
 
   @Prop({ required: true, trim: true })
-  phone: string;
+  phone!: string;
 
   @Prop({ required: true })
-  address: string;
+  address!: string;
+
+  @Prop({ default: null })
+  label?: string;
+
+  @Prop({ default: false })
+  isDefault?: boolean;
 
   @Prop()
   deletedAt?: Date;

@@ -1,15 +1,21 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { useCartStore } from "@/store/useCartStore"; 
+import { useProfile } from "./useUser";
 
-// 🎯 Hook 1: Lấy danh sách tất cả đơn hàng
+// 🎯 Hook 1: Lấy danh sách đơn hàng của user hiện tại
 export const useOrders = () => {
+  const { data: profile } = useProfile();
+  const userId = profile?.id || profile?._id;
+
   return useQuery({
-    queryKey: ["orders"],
+    queryKey: ["orders", userId],
     queryFn: async () => {
-      const { data } = await api.get("/orders");
-      return data;
+      if (!userId) return [];
+      const { data } = await api.get(`/orders/user/${userId}`);
+      return Array.isArray(data) ? data : data?.data || [];
     },
+    enabled: Boolean(userId),
   });
 };
 

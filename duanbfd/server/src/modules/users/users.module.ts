@@ -11,6 +11,7 @@ import { UserRepository } from './repositories/user.repository';
 import { AddressRepository } from './repositories/address.repository';
 
 import { ProfileController } from './controllers/profile.controller';
+import { AddressesController } from './controllers/addresses.controller';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { ProfileController } from './controllers/profile.controller';
       },
     ]),
   ],
-  controllers: [UsersController, ProfileController],
+  controllers: [UsersController, ProfileController, AddressesController],
   providers: [UsersService, UserRepository, AddressRepository],
   exports: [UsersService, UserRepository],
 })

@@ -27,3 +27,23 @@ export const useCreateOrder = () => {
     }
   });
 };
+
+export const useCancelOrder = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (orderId: string) => {
+      // Đã sửa api.post thành api.patch để khớp với Backend
+      const { data } = await api.patch(`/orders/${orderId}/cancel`);
+      return data;
+    },
+    onSuccess: () => {
+      // Làm mới lại cache đơn hàng để trang quản lý đơn cập nhật dữ liệu mới nhất
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    },
+    onError: (error: any) => {
+      console.error("Lỗi hủy đơn hàng:", error);
+      alert(error.response?.data?.message || "Hủy đơn hàng thất bại. Vui lòng thử lại!");
+    }
+  });
+};

@@ -13,4 +13,8 @@ export class AddressRepository extends BaseRepository<AddressDocument> {
   findByUserId(userId: string) {
     return this.model.find({ userId }).lean({ virtuals: true }).exec();
   }
+
+  delete(id: string) {
+    return this.deleteById(id);
+  }
 }

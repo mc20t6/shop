@@ -67,11 +67,15 @@ export default function ProductCard({ product }: ProductCardProps) {
   const displayImageUrl = productImage ? currentImg : getImageUrl(variantImage);
 
   const handleAddToCart = () => {
-    if (!product) {
+    if (!product || !firstVariant) {
       return;
     }
 
-    const vId = firstVariant?._id || firstVariant?.id || null;
+    const vId = firstVariant?._id || firstVariant?.id;
+
+    if (!vId) {
+      return;
+    }
 
     const priceToUse =
       Number(firstVariant?.price) ??
@@ -147,10 +151,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="flex gap-2 mt-auto">
           <button
             onClick={handleAddToCart}
-            disabled={!firstVariant && !product?.price}
+            disabled={!firstVariant || isLoadingVariants}
             className={`flex-1 py-2 rounded-md font-medium transition text-sm ${added
               ? 'bg-green-600 text-white'
-              : !firstVariant
+              : !firstVariant || isLoadingVariants
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 : 'bg-slate-900 text-white hover:bg-slate-800'
               }`}

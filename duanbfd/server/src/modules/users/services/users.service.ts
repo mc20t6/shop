@@ -7,15 +7,22 @@ import * as bcrypt from 'bcrypt';
 
 import { CreateStaffDto } from '../dto/create-staff.dto';
 import { UpdateStaffDto } from '../dto/update-staff.dto';
+import { CreateAddressDto } from '../dto/create-address.dto';
+import { UpdateAddressDto } from '../dto/update-address.dto';
+import { ChangePasswordDto } from '../dto/change-password.dto';
 import {
   UserRepository,
   UpdateUserData,
 } from '../repositories/user.repository';
+import { AddressRepository } from '../repositories/address.repository';
 import { Types } from 'mongoose';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly addressRepository: AddressRepository,
+  ) {}
 
   async createStaff(createStaffDto: CreateStaffDto) {
     const email = createStaffDto.email.toLowerCase().trim();
@@ -167,6 +174,33 @@ export class UsersService {
     });
   }
 
+  async changePassword(userId: string, body: ChangePasswordDto) {
+    if (!Types.ObjectId.isValid(userId)) {
+      throw new BadRequestException('ID người dùng không hợp lệ');
+    }
+
+    const user = await this.userRepository.findByIdUser(userId);
+
+    if (!user) {
+      throw new NotFoundException('Không tìm thấy người dùng');
+    }
+
+    const isMatch = await bcrypt.compare(body.oldPassword, user.password);
+    if (!isMatch) {
+      throw new BadRequestException('Mật khẩu cũ không đúng');
+    }
+
+    const hashedPassword = await bcrypt.hash(body.newPassword, 10);
+    await this.userRepository.updateByIdUser(userId, {
+      password: hashedPassword,
+      refreshToken: null,
+    });
+
+    return {
+      message: 'Đổi mật khẩu thành công. Vui lòng đăng nhập lại.',
+    };
+  }
+
   async findAllManagedUsers(query: any) {
     const page = Math.max(Number(query.page) || 1, 1);
     const limit = Math.max(Number(query.limit) || 10, 1);
@@ -269,5 +303,104 @@ export class UsersService {
       isActive: false,
       deletedAt: new Date(),
     });
+  }
+
+  // ============================
+  // QUẢN LÝ ĐỊA CHỈ
+  // ============================
+
+  async getAddressesByUserId(userId: string) {
+    if (!Types.ObjectId.isValid(userId)) {
+      throw new BadRequestException('ID người dùng không hợp lệ');
+    }
+
+    return this.addressRepository.findByUserId(userId);
+  }
+
+  async createAddress(userId: string, createAddressDto: CreateAddressDto) {
+    if (!Types.ObjectId.isValid(userId)) {
+      throw new BadRequestException('ID người dùng không hợp lệ');
+    }
+
+    const address = await this.addressRepository.create({
+      userId,
+      ...createAddressDto,
+    });
+
+    return address;
+  }
+
+  async getAddressById(userId: string, addressId: string) {
+    if (!Types.ObjectId.isValid(userId)) {
+      throw new BadRequestException('ID người dùng không hợp lệ');
+    }
+
+    if (!Types.ObjectId.isValid(addressId)) {
+      throw new BadRequestException('ID địa chỉ không hợp lệ');
+    }
+
+    const address = await this.addressRepository.findById(addressId);
+
+    if (!address) {
+      throw new NotFoundException('Không tìm thấy địa chỉ');
+    }
+
+    if (address.userId.toString() !== userId) {
+      throw new BadRequestException('Địa chỉ này không thuộc về bạn');
+    }
+
+    return address;
+  }
+
+  async updateAddress(
+    userId: string,
+    addressId: string,
+    updateAddressDto: UpdateAddressDto,
+  ) {
+    if (!Types.ObjectId.isValid(userId)) {
+      throw new BadRequestException('ID người dùng không hợp lệ');
+    }
+
+    if (!Types.ObjectId.isValid(addressId)) {
+      throw new BadRequestException('ID địa chỉ không hợp lệ');
+    }
+
+    const address = await this.addressRepository.findById(addressId);
+
+    if (!address) {
+      throw new NotFoundException('Không tìm thấy địa chỉ');
+    }
+
+    if (address.userId.toString() !== userId) {
+      throw new BadRequestException('Địa chỉ này không thuộc về bạn');
+    }
+
+    return this.addressRepository.updateById(addressId, updateAddressDto);
+  }
+
+  async deleteAddress(userId: string, addressId: string) {
+    if (!Types.ObjectId.isValid(userId)) {
+      throw new BadRequestException('ID người dùng không hợp lệ');
+    }
+
+    if (!Types.ObjectId.isValid(addressId)) {
+      throw new BadRequestException('ID địa chỉ không hợp lệ');
+    }
+
+    const address = await this.addressRepository.findById(addressId);
+
+    if (!address) {
+      throw new NotFoundException('Không tìm thấy địa chỉ');
+    }
+
+    if (address.userId.toString() !== userId) {
+      throw new BadRequestException('Địa chỉ này không thuộc về bạn');
+    }
+
+    await this.addressRepository.delete(addressId);
+
+    return {
+      message: 'Xóa địa chỉ thành công',
+    };
   }
 }
